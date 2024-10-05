@@ -19,6 +19,16 @@ Node* Insert(int x,Node* head)
 	return head;
 }
 
+/*地址传出
+Node* Insert(int x,Node** pointerToHead)
+{
+	Node *temp=(Node*)malloc(sizeof(struct Node));
+	temp->data=x;
+	temp->next=*pointerToHead;
+	*pointerToHead=temp;
+}
+*/
+
 //insert a node at position n
 void Insert(int x,Node** pointerToHead,int pos)
 {
@@ -104,28 +114,29 @@ void Print(Node *head)
 	printf("\n");
 }
 
-//下面这个改错了
-// print(recursion reverse)
-//Node* rPrint(Node *p)
-//{
-//	if(p->next==NULL)
-//	{
-//		head=p;
-//		return head;
-//	}
-//	rPrint(p->next);
-//	cout<<p->data<<" ";
-//}
-/*地址传head
-Node* Insert(int x,Node** pointerToHead)
+//print(recursion)
+void rPrint(Node *p)
 {
-	Node *temp=(Node*)malloc(sizeof(struct Node));
-	temp->data=x;
-	temp->next=*pointerToHead;
-	*pointerToHead=temp;
+	if(p==NULL)
+	{
+		return;
+	}
+	cout<<p->data<<" ";
+	rPrint(p->next);
 }
 
-*/
+//reverse print(recursion)
+void reversePrint(Node *p)
+{
+	if(p==NULL)
+	{
+		return;
+	}
+	cout<<p->data<<" ";
+	rPrint(p->next);
+}
+
+
 int main() {
 	struct Node* head=NULL;//empty list;
 	printf("How many?\n");
@@ -147,5 +158,6 @@ int main() {
 //	Print(head);
 	cout<<"reverse it!"<<endl;
 	head=rReverse(head);
-	Print(head);
+//	Print(head);
+	rPrint(head);
 }
